@@ -37,22 +37,18 @@ public class Race extends Thread {
         try {
             Athlete[] listAthlete = new Athlete[athletes];
 
-            // Crear y arrancar los hilos fuera del bloque synchronized
             for (int i = 0; i < athletes; i++) {
                 listAthlete[i] = new Athlete(i);
                 listAthlete[i].start();
             }
 
-            // Iniciar la carrera después de crear todos los hilos
             iniciarCarrera();
 
-            // Actualizar la salida para todos los atletas
             synchronized (startRace) {
                 setSalida(1);
-                startRace.notifyAll(); // Notificar a todos los hilos
+                startRace.notifyAll();
             }
 
-            // Esperar a que todos los hilos terminen
             for (Athlete athlete : listAthlete) {
                 athlete.join();
             }
@@ -85,10 +81,10 @@ public class Race extends Thread {
                     case "!ya":
                     synchronized (startRace) {
                             System.out.println("¡La carrera ha comenzado!");
-                            setSalida(1); // Cambia el estado de la salida
-                            startRace.notifyAll(); // Notifica a todos los hilos esperando
+                            setSalida(1);
+                            startRace.notifyAll();
                         }
-                        return; // Salir del bucle cuando la carrera comienza
+                        return;
                     default:
                         System.out.println("La orden no existe. Inténtalo de nuevo.");
                 }
