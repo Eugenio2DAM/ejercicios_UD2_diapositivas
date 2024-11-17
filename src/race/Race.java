@@ -62,32 +62,20 @@ public class Race extends Thread {
         Scanner lector = new Scanner(System.in);
         while (salida != 1) {
             try {
-                System.out.println("Da una instrucción:"
-                        + "\n1º- preparados"
-                        + "\n2º- listos"
-                        + "\n3º- !ya"
-                        + "\nEscribe tu orden: ");
-                String eleccion = lector.nextLine().toLowerCase();
 
-                switch (eleccion) {
-                    case "preparados":
-                        System.out.println("Atletas preparados...");
-                        Thread.sleep(1000);
-                        break;
-                    case "listos":
-                        System.out.println("Atletas listos...");
-                        Thread.sleep(1000);
-                        break;
-                    case "!ya":
+                System.out.println("Preparados!!!!");
+                Thread.sleep(1000);
+
+                System.out.println("Listos!!!!!");
+                Thread.sleep(1000);
+
+                System.out.println("!yaaaaa");
                     synchronized (startRace) {
-                            System.out.println("¡La carrera ha comenzado!");
-                            setSalida(1);
-                            startRace.notifyAll();
-                        }
-                        return;
-                    default:
-                        System.out.println("La orden no existe. Inténtalo de nuevo.");
+                    System.out.println("¡La carrera ha comenzado!");
+                    setSalida(1);
+                    startRace.notifyAll();
                 }
+
             } catch (InterruptedException ex) {
                 Logger.getLogger(Race.class.getName()).log(Level.SEVERE, null, ex);
             }
